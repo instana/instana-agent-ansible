@@ -1,0 +1,21 @@
+# encoding: utf-8
+%YAML 1.2
+---
+
+- name: instana-agent-restart
+  become: yes
+  service:
+    name: instana-agent
+    state: restarted
+
+- name: instana-agent-start
+  become: yes
+  service:
+    name: instana-agent
+    state: started
+
+- name: instana-agent-stop
+  become: yes
+  service:
+    name: instana-agent
+    state: stopped

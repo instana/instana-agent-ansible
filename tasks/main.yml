@@ -1,0 +1,73 @@
+# encoding: utf-8
+%YAML 1.2
+---
+
+- name: 'check: flavor attribute valid?'
+  fail:
+    msg: |
+      The flavor attribute for the agent must be of either "full" or
+      "minimal" value.
+  when: >
+    instana.agent.flavor != 'minimal' and
+    instana.agent.jdk != 'full'
+
+- name: 'check: mode attribute valid?'
+  fail:
+    msg: |
+      The agent mode attribute must be of either "apm",  "infrastructure"
+      or "off" value.
+  when: >
+    instana.agent.mode != 'off' and
+    instana.agent.mode != 'apm' and
+    instana.agent.mode != 'infrastructure'
+
+- name: 'check: jdk dir configured for minimal installations?'
+  fail:
+    msg: |
+      When picking the minimal installation method for the Instana Agent,
+      please specify a path to an Oracle- or OpenJDK.
+  when: >
+    instana.agent.flavor == 'minimal' and
+    instana.agent.jdk == ''
+
+- name: 'check: required attributes present?'
+  fail:
+    msg: |
+      If we don't have all the informations on the required Instana
+      monitoring endpoint or the agent key, we cannot install the Instana
+      monitoring agent.
+  when: >
+    instana.agent.endpoint.host == '' or
+    instana.agent.endpoint.port == '' or
+    instana.agent.agent_key == ''
+
+- name: 'check: is specified group existing?'
+  getent:
+    database: group
+    key: "{{ instana.agent.group }}"
+    fail_key: yes
+  when: instana.agent.group != 'root'
+
+- name: 'check: is specified user existing?'
+  getent:
+    database: passwd
+    key: "{{ instana.agent.user }}"
+    fail_key: yes
+  when: instana.agent.user != 'root'
+
+- include: repo.yml
+- include: init.yml
+- include: files.yml
+
+- name: 'change the permissions of the agent directory'
+  file:
+    group: "{{ instana.agent.group }}"
+    owner: "{{ instana.agent.user }}"
+    path: "/opt/instana/agent"
+    recurse: yes
+
+- name: 'ensure the agent is running'
+  service:
+    name: 'instana-agent'
+    state: 'started'
+  when: instana.agent.ensure_running

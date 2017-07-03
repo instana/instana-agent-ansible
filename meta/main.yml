@@ -1,0 +1,36 @@
+# encoding: utf-8
+%YAML 1.2
+---
+
+dependencies: []
+
+galaxy_info:
+  author: Stefan Staudenmeyer (@doertedev)
+  description: |
+    Instana is the next generation Application Performance Management
+    solution that automatically monitors scheduled environments/dynamic
+    modern applications.\nInstana comprehensively manages the quality
+    of service of your microservice applications with zero to absolute
+    minimal configuration effort.
+  license: Apache 2.0
+  company: Instana, Inc.
+  min_ansible_version: 2.3.0.0
+  standards:
+    - version: 1.2
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+        - trusty
+    - name: CentOS
+      versions:
+        - 6
+        - 7
+    - name: Redhat
+      versions:
+        - 6
+        - 7
+  galaxy_tags:
+    - development
+    - operations
+    - monitoring

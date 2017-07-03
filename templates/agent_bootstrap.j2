@@ -1,0 +1,5 @@
+# To prevent automatic updates and use a fixed version of the agent set it here
+{% if instana.agent.updates.pin != '' and not instana.agent.updates.enabled %}version = {{ instana.agent.updates.pin }}{% endif %}
+
+# Provide the source of agent installation in the log output for debugging purposes
+origin = public_ansible
