@@ -1,0 +1,75 @@
+# encoding: utf-8
+%YAML 1.2
+---
+
+- set_fact:
+    systemd_srv_dir: '/etc/systemd/system/instana-agent.service.d'
+
+- name: "sysvconfig defaults dir check - does sysconfig exist?"
+  stat:
+    path: /etc/sysconfig
+  register: instana_sysvinit_sysconfig
+
+- name: 'create service dropin subdirectory'
+  file:
+    path: "{{ systemd_srv_dir }}"
+    group: 'root'
+    mode: 644
+    owner: 'root'
+    state: 'directory'
+  when: >
+    ansible_service_mgr == 'systemd' and
+    ((instana.agent.user != 'root' or instana.agent.group != 'root') or
+    (instana.agent.limit.cpu.enabled or
+    instana.agent.limit.memory.enabled))
+
+- name: 'create service dropin for users'
+  template:
+    dest: "{{ systemd_srv_dir }}/10-users.conf"
+    src: "templates/systemd_service.j2"
+    group: 'root'
+    mode: 644
+    owner: 'root'
+  when: >
+    ansible_service_mgr == 'systemd' and
+    (instana.agent.user != 'root' or instana.agent.group != 'root')
+
+- name: 'create service dropin for resource consumption'
+  template:
+    dest: "{{ systemd_srv_dir }}/20-resources.conf"
+    src: "templates/systemd_resources.j2"
+    group: 'root'
+    mode: 644
+    owner: 'root'
+  when: >
+    ansible_service_mgr == 'systemd' and
+    (instana.agent.limit.cpu.enabled or
+    instana.agent.limit.memory.enabled)
+
+- name: 'create sysvinit defaults file for debian-based systems'
+  copy:
+    dest: '/etc/default/instana-agent'
+    group: 'root'
+    owner: 'root'
+    mode: 644
+    content: |
+      INSTANA_AGENT_USER={{ instana.agent.user }}
+      INSTANA_AGENT_GROUP={{ instana.agent.group }}
+  when: >
+    instana_sysvinit_sysconfig.stat.exists != True and
+    ansible_service_mgr != 'systemd' and
+    (instana.agent.user != 'root' or instana.agent.group != 'root')
+
+- name: 'create sysvinit defaults file for redhat-based systems'
+  copy:
+    dest: '/etc/sysconfig/instana-agent'
+    group: 'root'
+    owner: 'root'
+    mode: 644
+    content: |
+      INSTANA_AGENT_USER={{ instana.agent.user }}
+      INSTANA_AGENT_GROUP={{ instana.agent.group }}
+  when: >
+    instana_sysvinit_sysconfig.stat.exists and
+    ansible_service_mgr != 'systemd' and
+    (instana.agent.user != 'root' or instana.agent.group != 'root')

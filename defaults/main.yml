@@ -1,0 +1,141 @@
+# encoding: utf-8
+%YAML 1.2
+---
+
+# instana-agent - Attributes file - defining attributes for the instana-agent
+
+# Author:: Stefan Staudenmeyer <stefan.staudenmeyer@instana.com>
+# Copyright:: 2009-2017, Instana, Inc.
+# License:: Proprietary - All rights reserved.
+instana:
+  agent:
+
+    # We won't make sure that the agent is running if this is set to false.
+    # The main purpose for setting this to false can be further templating,
+    # like setting database credentials in the configuration.yml file.
+    ensure_running: True
+
+    # This mode specifies the mode under which the Instana agent should run.
+    # Possible values are "apm", "infrastructure" and "off".
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/Agent+Management#AgentManagement-Agentmode
+    mode: "apm"
+
+    # These settings enable you to set hard resource limits for the Instana agent
+    # and its runtime underneath via Systemd CGroup settings.
+    # Possible values: True | False
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/Limiting+Agent%27s+CPU+and+Memory+in+different+environments
+    # See:: https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html
+    limit:
+      cpu:
+        enabled: True
+        quota: 0.5 # ( == 50%)
+      memory:
+        enabled: True
+        maxsize: 512 # (MB)
+
+    # We ship our Instana Agent in two flavors: "full" and "minimal".
+    # The full flavored agent comes with a JDK (zulu OpenJDK in recent versions)
+    # and a set of all recent sensors that we ship on a daily basis.
+    # The minimal flavored agent comes with neither and therefore upon start
+    # downloads the sensors. It requires the JAVA_HOME environment variable, or
+    # instana.agent.jdk set in order to start.
+    # Possible values: "full" | "minimal".
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/The+Manual+Installation+Process
+    flavor: "full"
+
+    # When you register with us you receive a string that makes the credentials you
+    # need in order to download the agent and its sensors. It can be seen as a
+    # tenantcy identifier across the platform.
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/The+Manual+Installation+Process
+    agent_key: ""
+
+    # This is the machine the Instana agent will connect to directly. This will
+    # either be one of our SaaS endpoints, or your Instana on premises installation
+    # hostname or address.
+    # See:: https://instana.atlassian.net/wiki/pages/viewpage.action?pageId=1179831
+    endpoint:
+      host: "saas-us-west-2.instana.io"
+
+    # See instana.agent.endpoint.host. On our SaaS platform, the
+    # monitoring endpoint port is 443. For most on premises installations, this
+    # number is 1444.
+    # See:: https://instana.atlassian.net/wiki/pages/viewpage.action?pageId=1179831
+      port: 443
+
+    # For minimal flavored agents (see instana.agent.flavor), we
+    # require a JDK installation path to be set in order to be able to start the
+    # agent. An alternative to setting this path here would be to set the JAVA_HOME
+    # environment variable externally for the user the Instana agent should run as.
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/The+Manual+Installation+Process
+    jdk: ""
+
+    # The Instana agent can run as a specific user / group. Please notice that this
+    # can lead to problems in attaching to the software on the machine, but we
+    # support it. The user and its group must exist beforehand and have shell
+    # access rights to run properly.
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/Manual+Agent+Installation
+    user: "root"
+    group: "root"
+
+    # The Instana agent updates its set of sensors automatically in the background
+    # unless configured differently.
+    # Possible values: True | False.
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/Agent+Versioning+and+Update+Management
+    updates:
+      enabled: True
+
+    # We support running the Instana agent with a specific set of sensors.
+    # Possible values: a string with a git commit hash.
+      pin: ""
+
+    # See instana.agent.updates.enabled.
+    # Possible values: "DAY" | "MONDAY" | "TUESDAY"...
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/Agent+Versioning+and+s+Management
+      interval: "DAY"
+
+    # See instana.agent.updates.enabled.
+    # Possible values: a string containing the time of the day where the update
+    #   is scheduled, in 24h format.
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/Agent+Versioning+and+Update+Management
+      time: "04:30"
+
+    # The agent zone is a visual helper under which hosts are being categorized
+    # on the physical map. This, along with the list of host tags, can help filter
+    # and search.
+    # Possible values: a string containing UTF-8 characters.
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/Infrastructure+View
+    zone: ""
+
+    # The agent tags are a list of strings that will categorize the host machine
+    # and are. This, along with the list of host tags, can help filter and search.
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/Infrastructure+View
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/Host
+    tags: []
+
+    # We support running and updating the Instana agent through a proxy setup.
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/Agent+Proxy+Setup
+    proxy:
+      enabled: False
+      type: "http"
+      host: ""
+      port: 0
+      username: ""
+      password: ""
+
+    # Please set this to True when the machine cant resolve DNS itself and needs
+    # this to be taken care of by the proxy.
+    # See:: instana.agent.proxy enabled
+      dns: True
+
+    # If you mirror our agent sensor and update repository, you can specify its
+    # credentials and addresses here.
+    # See:: https://instana.atlassian.net/wiki/display/DOCS/Using+On+Prem+Agent+Repository
+    mirror:
+      enabled: False
+      auth:
+        enabled: False
+        username: ""
+        password: ""
+      urls:
+        release: ""
+        shared: ""

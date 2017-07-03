@@ -1,0 +1,70 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <localRepository>data/repo</localRepository>
+  <servers>
+    <server>
+      <id>features</id>
+      <username>agent</username>
+      <password>APBSjZhLhjeGZ9uq</password>
+    </server>
+    <server>
+      <id>shared</id>
+      <username>agent</username>
+      <password>APBSjZhLhjeGZ9uq</password>
+    </server>
+    {% if instana.agent.mirror.auth.enabled %}
+      <server>
+        <id>features-mirror</id>
+        <username>{{ instana.agent.mirror.auth.username }}</username>
+        <password>{{ instana.agent.mirror.auth.password }}</password>
+      </server>
+      <server>
+        <id>shared-mirror</id>
+        <username>{{ instana.agent.mirror.auth.username }}</username>
+        <password>{{ instana.agent.mirror.auth.password }}</password>
+      </server>
+    {% endif %}
+  </servers>
+
+  <!-- If you want to access the Instana repository using an HTTP/Socks proxy,
+       uncomment the proxies section and insert proxy details. -->
+  <!-- https://maven.apache.org/guides/mini/guide-proxies.html -->
+{% if instana.agent.proxy.enabled %}
+  <proxies>
+    <proxy>
+      <id>agent-proxy</id>
+      <active>true</active>
+      <protocol>{{ instana.agent.proxy.type }}</protocol>
+      <host>{{ instana.agent.proxy.host }}</host>
+      <port>{{ instana.agent.proxy.port }}</port>
+      {% if instana.agent.proxy.username != '' %}<username>{{ instana.agent.proxy.username }}</username>{% endif %}
+      {% if instana.agent.proxy.password != '' %}<password>{{ instana.agent.proxy.password }}</password>{% endif %}
+    </proxy>
+  </proxies>
+{% endif %}
+
+  <!-- If you want to use a company internal mirror, make sure that mirror is
+       configured to use the Instana repository, uncomment the mirrors section
+       and insert maven mirror details.
+       If the mirror also requires auth it can be added above. -->
+  <!-- https://maven.apache.org/guides/mini/guide-mirror-settings.html -->
+  <!-- Repos that need to be mirrored -->
+  <!-- feature: https://repo-public.instana.io/artifactory/features-public -->
+  <!-- shared: https://repo-public.instana.io/artifactory/shared -->
+  {% if instana.agent.mirror.enabled %}
+  <mirrors>
+    <mirror>
+      <id>features-mirror</id>
+      <url>{{ instana.agent.mirror.urls.release }}</url>
+      <mirrorOf>features</mirrorOf>
+    </mirror>
+    <mirror>
+      <id>shared-mirror</id>
+      <url>{{ instana.agent.mirror.urls.shared }}</url>
+      <mirrorOf>shared</mirrorOf>
+    </mirror>
+  </mirrors>
+  {% endif %}
+</settings>

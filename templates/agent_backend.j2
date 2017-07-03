@@ -1,0 +1,30 @@
+# Configures connection to the Instana SaaS. Changes will be hot-reloaded.
+
+# Host and Port usually do not need to be changed, but can be modified to
+# tunnel connections.
+host={{ instana.agent.endpoint.host }}
+port={{ instana.agent.endpoint.port }}
+protocol=HTTP/2
+
+# By setting a comma separated list of certificate fingerprints, the agent will
+# refuse connection in case any other certificate is presented by the server.
+# This prevents MITM attacks, but some situations might require to accept
+# certificates other than Instana ones or even any certificate.
+# fingerprints=29:17:5A:F4:2E:35:DF:87:D6:1F:4D:C8:A8:01:D2:43:18:47:BF:6E
+
+# The HTTP/2 connection to Instana SaaS can be proxied.
+{% if instana.agent.proxy.enabled | bool %}
+## Proxy Server
+proxy.host={{ instana.agent.proxy.host }}
+proxy.port={{ instana.agent.proxy.port }}
+## Supported proxy.type values are "http", "socks4", "socks5"
+proxy.type={{ instana.agent.proxy.type }}
+## If proxy.dns is set to "true", no local DNS resolution is attempted
+{% if instana.agent.proxy.dns %}proxy.dns=true{% endif %}
+## Some proxy servers require authentication
+{% if instana.agent.proxy.username != '' %}proxy.user={{ instana.agent.proxy.username }}{% endif %}
+{% if instana.agent.proxy.password != '' %}proxy.password={{ instana.agent.proxy.password }}{% endif %}
+{% endif %}
+
+# Access Key for your SaaS installation. Is pre-filled during agent download.
+key={{ instana.agent.agent_key }}

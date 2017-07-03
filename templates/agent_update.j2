@@ -1,0 +1,10 @@
+# Instana Update Manager configuration.
+
+# AUTO for automatic updates with given schedule. OFF for no automatic updates.
+mode = {{ instana.agent.updates.enabled }}
+
+# DAY for daily, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+every = {{ instana.agent.updates.interval }}
+
+# Time is hh:mm in 24 hours format.
+at = {{ instana.agent.updates.time }}
