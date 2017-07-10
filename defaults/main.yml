@@ -1,141 +1,113 @@
 # encoding: utf-8
-%YAML 1.2
 ---
 
 # instana-agent - Attributes file - defining attributes for the instana-agent
 
 # Author:: Stefan Staudenmeyer <stefan.staudenmeyer@instana.com>
-# Copyright:: 2009-2017, Instana, Inc.
-# License:: Proprietary - All rights reserved.
-instana:
-  agent:
+# Copyright:: 2017, Instana, Inc.
+# License:: Apache-2.0
 
-    # We won't make sure that the agent is running if this is set to false.
-    # The main purpose for setting this to false can be further templating,
-    # like setting database credentials in the configuration.yml file.
-    ensure_running: True
+# We won't make sure that the agent is running if this is set to false.
+# The main purpose for setting this to false can be further templating,
+# like setting database credentials in the configuration.yml file.
+instana_agent_run: True
 
-    # This mode specifies the mode under which the Instana agent should run.
-    # Possible values are "apm", "infrastructure" and "off".
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/Agent+Management#AgentManagement-Agentmode
-    mode: "apm"
+# This mode specifies the mode under which the Instana agent should run.
+# Possible values are "apm", "infrastructure" and "off".
+# See:: https://docs.instana.io/quick_start/agent_configuration/#agent-mode
+instana_agent_mode: "apm"
 
-    # These settings enable you to set hard resource limits for the Instana agent
-    # and its runtime underneath via Systemd CGroup settings.
-    # Possible values: True | False
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/Limiting+Agent%27s+CPU+and+Memory+in+different+environments
-    # See:: https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html
-    limit:
-      cpu:
-        enabled: True
-        quota: 0.5 # ( == 50%)
-      memory:
-        enabled: True
-        maxsize: 512 # (MB)
+# These settings enable you to set hard resource limits for the Instana agent
+# and its runtime underneath via Systemd CGroup settings.
+# Possible values: True | False
+# See:: https://docs.instana.io/quick_start/agent_configuration/#limiting-agents-cpu-and-memory-in-different-environments
+instana_agent_limit_cpu_enabled: True
+instana_agent_limit_cpu_quota: 0.5 # ( == 50%)
+instana_agent_limit_memory_enabled: True
+instana_agent_limit_memory_maxsize: 512 # (MB)
 
-    # We ship our Instana Agent in two flavors: "full" and "minimal".
-    # The full flavored agent comes with a JDK (zulu OpenJDK in recent versions)
-    # and a set of all recent sensors that we ship on a daily basis.
-    # The minimal flavored agent comes with neither and therefore upon start
-    # downloads the sensors. It requires the JAVA_HOME environment variable, or
-    # instana.agent.jdk set in order to start.
-    # Possible values: "full" | "minimal".
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/The+Manual+Installation+Process
-    flavor: "full"
+# We ship our Instana Agent in two flavors: "dynamic" and "static".
+# The static flavored agent comes with a JDK (Zulu OpenJDK in a recent
+# version) and a set of all recent sensors that we ship on a daily basis.
+# It is the perfect fit when you have strict firewall settings and don't
+# want the agents to connect to the internet, ever.
+# The dynamic flavored agent comes with a JDK as well, and downloads the
+# required sensors on startup phase.
+# Possible values: "static" | "dynamic".
+# See:: https://docs.instana.io/quick_start/agent_configuration/
+instana_agent_flavor: 'dynamic'
 
-    # When you register with us you receive a string that makes the credentials you
-    # need in order to download the agent and its sensors. It can be seen as a
-    # tenantcy identifier across the platform.
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/The+Manual+Installation+Process
-    agent_key: ""
+# When you register with us you receive a string that makes the credentials you
+# need in order to download the agent and its sensors. It can be seen as a
+# tenantcy identifier across the platform.
+# See:: https://docs.instana.io/quick_start/agent_configuration/#backend
+instana_agent_agent_key: ""
 
-    # This is the machine the Instana agent will connect to directly. This will
-    # either be one of our SaaS endpoints, or your Instana on premises installation
-    # hostname or address.
-    # See:: https://instana.atlassian.net/wiki/pages/viewpage.action?pageId=1179831
-    endpoint:
-      host: "saas-us-west-2.instana.io"
+# This is the machine the Instana agent will connect to directly. This will
+# either be one of our SaaS endpoints, or your Instana on premises installation
+# hostname or address.
+# See:: https://docs.instana.io/quick_start/agent_setup/linux/#one-liner-installation
+instana_agent_endpoint_host: "saas-us-west-2.instana.io"
 
-    # See instana.agent.endpoint.host. On our SaaS platform, the
-    # monitoring endpoint port is 443. For most on premises installations, this
-    # number is 1444.
-    # See:: https://instana.atlassian.net/wiki/pages/viewpage.action?pageId=1179831
-      port: 443
+# See instana.agent.endpoint.host. On our SaaS platform, the
+# monitoring endpoint port is 443. For most on premises installations, this
+# number is 1444.
+# See:: https://docs.instana.io/quick_start/agent_setup/linux/#one-liner-installation
+instana_agent_endpoint_port: 443
 
-    # For minimal flavored agents (see instana.agent.flavor), we
-    # require a JDK installation path to be set in order to be able to start the
-    # agent. An alternative to setting this path here would be to set the JAVA_HOME
-    # environment variable externally for the user the Instana agent should run as.
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/The+Manual+Installation+Process
-    jdk: ""
+# The Instana agent updates its set of sensors automatically in the background
+# unless configured differently.
+# Possible values: True | False.
+# See:: https://docs.instana.io/quick_start/agent_configuration/#agent-versioning-and-update-management
+instana_agent_updates_enabled: True
 
-    # The Instana agent can run as a specific user / group. Please notice that this
-    # can lead to problems in attaching to the software on the machine, but we
-    # support it. The user and its group must exist beforehand and have shell
-    # access rights to run properly.
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/Manual+Agent+Installation
-    user: "root"
-    group: "root"
+# We support running the Instana agent with a specific set of sensors.
+# Possible values: a string with a git commit hash.
+instana_agent_updates_pin: ""
 
-    # The Instana agent updates its set of sensors automatically in the background
-    # unless configured differently.
-    # Possible values: True | False.
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/Agent+Versioning+and+Update+Management
-    updates:
-      enabled: True
+# See instana.agent.updates.enabled.
+# Possible values: "DAY" | "MONDAY" | "TUESDAY"...
+# See:: https://docs.instana.io/quick_start/agent_configuration/#agent-versioning-and-update-management
+instana_agent_updates_interval: "DAY"
 
-    # We support running the Instana agent with a specific set of sensors.
-    # Possible values: a string with a git commit hash.
-      pin: ""
+# See instana.agent.updates.enabled.
+# Possible values: a string containing the time of the day where the update
+#   is scheduled, in 24h format.
+# See:: https://docs.instana.io/quick_start/agent_configuration/#agent-versioning-and-update-management
+instana_agent_updates_time: "04:30"
 
-    # See instana.agent.updates.enabled.
-    # Possible values: "DAY" | "MONDAY" | "TUESDAY"...
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/Agent+Versioning+and+s+Management
-      interval: "DAY"
+# The agent zone is a visual helper under which hosts are being categorized
+# on the physical map. This, along with the list of host tags, can help filter
+# and search.
+# Possible values: a string containing UTF-8 characters.
+# See:: https://docs.instana.io/quick_start/agent_configuration/#custom-zones
+instana_agent_zone: ""
 
-    # See instana.agent.updates.enabled.
-    # Possible values: a string containing the time of the day where the update
-    #   is scheduled, in 24h format.
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/Agent+Versioning+and+Update+Management
-      time: "04:30"
+# The agent tags are a list of strings that will categorize the host machine
+# and are. This, along with the list of host tags, can help filter and search.
+# See:: https://docs.instana.io/quick_start/agent_configuration/#tags
+instana_agent_tags: []
 
-    # The agent zone is a visual helper under which hosts are being categorized
-    # on the physical map. This, along with the list of host tags, can help filter
-    # and search.
-    # Possible values: a string containing UTF-8 characters.
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/Infrastructure+View
-    zone: ""
+# We support running and updating the Instana agent through a proxy setup.
+# See:: https://docs.instana.io/quick_start/on_prem/on_prem_agent_repository/#sonatype-nexus-proxy-setup
+instana_agent_proxy_enabled: False
+instana_agent_proxy_type: "http"
+instana_agent_proxy_host: ""
+instana_agent_proxy_port: 0
+instana_agent_proxy_username: ""
+instana_agent_proxy_password: ""
 
-    # The agent tags are a list of strings that will categorize the host machine
-    # and are. This, along with the list of host tags, can help filter and search.
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/Infrastructure+View
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/Host
-    tags: []
+# Please set this to True when the machine cant resolve DNS itself and needs
+# this to be taken care of by the proxy.
+# See:: instana.agent.proxy enabled
+instana_agent_proxy_dns: True
 
-    # We support running and updating the Instana agent through a proxy setup.
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/Agent+Proxy+Setup
-    proxy:
-      enabled: False
-      type: "http"
-      host: ""
-      port: 0
-      username: ""
-      password: ""
-
-    # Please set this to True when the machine cant resolve DNS itself and needs
-    # this to be taken care of by the proxy.
-    # See:: instana.agent.proxy enabled
-      dns: True
-
-    # If you mirror our agent sensor and update repository, you can specify its
-    # credentials and addresses here.
-    # See:: https://instana.atlassian.net/wiki/display/DOCS/Using+On+Prem+Agent+Repository
-    mirror:
-      enabled: False
-      auth:
-        enabled: False
-        username: ""
-        password: ""
-      urls:
-        release: ""
-        shared: ""
+# If you mirror our agent sensor and update repository, you can specify its
+# credentials and addresses here.
+# See:: https://docs.instana.io/quick_start/on_prem/on_prem_agent_repository
+instana_agent_mirror_enabled: False
+instana_agent_mirror_auth_enabled: False
+instana_agent_mirror_auth_username: ""
+instana_agent_mirror_auth_password: ""
+instana_agent_mirror_urls_release: ""
+instana_agent_mirror_urls_shared: ""

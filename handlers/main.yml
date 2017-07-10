@@ -1,21 +1,18 @@
 # encoding: utf-8
-%YAML 1.2
 ---
 
 - name: instana-agent-restart
-  become: yes
   service:
     name: instana-agent
     state: restarted
+  become: yes
 
-- name: instana-agent-start
+- name: 'ensure the agent is running'
   become: yes
   service:
-    name: instana-agent
-    state: started
+    name: 'instana-agent'
+    state: 'started'
 
-- name: instana-agent-stop
+- name: reload-systemd
   become: yes
-  service:
-    name: instana-agent
-    state: stopped
+  shell: "systemctl daemon-reload"

@@ -1,95 +1,54 @@
-# README.md
-# Ansible Role: Instana Agent 1.x
+# instana-agent Ansible role
 
-  This ansible role installs the Instana Agent on any of these supported
-  platforms:
+This [Ansible](https://ansible.com) role installs, configures and runs the monitoring agent for the [Instana monitoring suite](https://www.instana.com).
 
-* CentOS 6 & 7
-* Redhat Enterprise Linux 6 & 7
-* Amazon Linux
-* Debian Jessie
-* Ubuntu Xenial & Trusty
-* SUSE Enterprise Linux 12 (>= sp 2)
-
-## Requirements
-
-* If you're running a Debian or Ubuntu system, you are required to install
-apt-transport https.
-* RPM-based distributions require up to date versions of openssl and nss in order to speak current ciphers with our agent repositories.
-* When the agent should run in a proxied environment, the package manager needs to be configured to utilize the needed proxy.
-* For "minimal" flavored agents, you'd need either an OpenJDK or Oracle JDK of the Version 8 (we support releases greater than 40) configured in the instana/agent/jdk variable.
-
-## Role Variables
-
-  Available variables are listed below, along with default values:
+## Example:
 
 ```yaml
-instana:
-  agent:
-    mode: "apm"
-    limit:
-      cpu:
-        enabled: true
-        quota: 0.5
-      memory:
-        enabled: true
-        maxsize: 512
-    flavor: "full"
-    agent_key:
-    endpoint:
-      host: "saas-us-west-2.instana.io"
-      port: 443
-    jdk: ""
-    user: "root"
-    group: "root"
-    updates:
-      enabled: true
-      interval: "DAY"
-      time: "04:30"
-      pin: ""
-    zone: ""
-    tags: []
-    proxy:
-      enabled: false
-      type: "http"
-      host: ""
-      port: 0
-      username: ""
-      password: ""
-      dns: true
-    mirror:
-      enabled: false
-      auth:
-        enabled: false
-        username: ""
-        password: ""
-      urls:
-        release: ""
-        shared: ""
+---
+  - hosts: all
+    become: yes
+    roles:
+      - ansible-role
+    vars:
+      instana_agent_flavor: "dynamic"
+      instana_agent_jdk: "/opt/jdk"
+      instana_agent_updates_enabled: yes
+      instana_agent_updates_interval: "DAY"
+      instana_agent_updates_time: "04:30"
+      instana_agent_zone: "prod"
+      instana_agent_agent_key: abcdef1234567890+-?
+      instana_agent_endpoint_host: saas-us-west-2.instana.io
+      instana_agent_endpoint_port: 443
 ```
 
-## Example Playbook
+## Flavors
 
-```yaml
-- hosts: webservers
-  gather_facts: true
-  roles:
-    - role: instana-agent
-      instana:
-        agent:
-          jdk: "/opt/jvm/jdk"
-          flavor: "minimal"
-          agent_key: "123456789-a1b2c3d4e5-abcdefg"
-          endpoint:
-            host: "my-on-premises-backend.machine.cluster"
-            port: 1444
-          zone: "QA"
-          tags:
-            - "provisioned"
-            - "by"
-            - "ansible"
-```
+**`instana-agent-dynamic`**
 
-## License
+This blank agent comes bundled with a JDK and is configured to download all neccessary sensors when it starts. Additionally, it is configured to update its set of sensors on a daily basis.
 
-Apache 2.0
+**`instana-agent-static`**
+
+This "gated" agent package is supposed to not connect to the internet at all. It comes with all the recent sensors and a JDK, and is your package of choice when you run a tight firewall setup.
+
+## Monitoring endpoint
+
+If you're an onprem customer, please specify your hostname and port in the corresponding attributes. If you're using our SaaS offering, and don't know which endpoint the agent should send to, feel free to ask our sales team.
+
+## Supported operating systems
+
+See [our official documentation](https://instana.atlassian.net/wiki/spaces/DOCS/pages/26163562/The+Manual+Installation+Process).
+
+## Attributes
+
+* See [attributes file](https://github.com/instana/ansible-role/blob/master/attributes/default.rb).
+
+## License and Authors
+
+This cookbook is being submitted and maintained under the [Apache v2.0 License](https://github.com/instana/ansible-role/blob/master/LICENSE).
+
+* [Bastian Spanneberg](https://github.com/spanneberg)
+* [Stefan Staudenmeyer](https://github.com/doerteDev)
+
+Copyright 2017, INSTANA Inc.

@@ -21,17 +21,18 @@
 #    - 'secret'
 
 # Host
-{% if instana.agent.tags|length > 0 %}
+{% if instana_agent_tags|length > 0 %}
 com.instana.plugin.host:
-  tags:{% for tag in instana.agent.tags %}
+  tags:
+{% for tag in instana_agent_tags %}
     - '{{ tag }}'
 {% endfor %}
 {% endif %}
 
 # Hardware & Zone
-{% if instana.agent.zone != '' %}
+{% if instana_agent_zone != '' %}
 com.instana.plugin.generic.hardware:
-  availability-zone: '{{ instana.agent.zone }}'
+  availability-zone: '{{ instana_agent_zone }}'
   enabled: true # disabled by default
 {% endif %}
 

@@ -1,9 +1,9 @@
 [Service]
-{% if instana.agent.limit.cpu.enabled %}
+{% if instana_agent_limit_cpu_enabled %}
 CPUAccounting=true
-CPUQuota={{ ( instana.agent.limit.cpu.quota * 100 ) }}%
+CPUQuota={{ ( instana_agent_limit_cpu_quota * 100 ) }}%
 {% endif %}
-{% if instana.agent.limit.memory.enabled %}
+{% if instana_agent_limit_memory_enabled %}
 MemoryAccounting=true
-MemoryMax={{ instana.agent.limit.memory.maxsize }}M
+MemoryMax={{ instana_agent_limit_memory_maxsize }}M
 {% endif %}
