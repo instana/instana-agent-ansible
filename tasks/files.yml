@@ -1,5 +1,4 @@
 # encoding: utf-8
-%YAML 1.2
 ---
 
 - set_fact:
@@ -10,54 +9,63 @@
   template:
     dest:  "{{ config_dir }}mvn-settings.xml"
     src: 'templates/maven_settings.j2'
-    group: "{{ instana.agent.group }}"
-    owner: "{{ instana.agent.user }}"
+    group: 'root'
+    owner: 'root'
     mode: 644
+  notify: 'ensure the agent is running'
 
 - name: 'template agent backend config'
   template:
     dest:  "{{ config_prefix }}main.sender.Backend.cfg"
     src: 'templates/agent_backend.j2'
-    group: "{{ instana.agent.group }}"
-    owner: "{{ instana.agent.user }}"
+    group: 'root'
+    owner: 'root'
     mode: 644
 
 - name: 'template agent sensor version pin config'
   template:
-    dest: "{{ config_prefix }}main.bootstrap.AgentBootstrap.cfg"
+    dest: "{{ config_prefix }}bootstrap.AgentBootstrap.cfg"
     src: 'templates/agent_bootstrap.j2'
-    group: "{{ instana.agent.group }}"
-    owner: "{{ instana.agent.user }}"
+    group: 'root'
+    owner: 'root'
     mode: 644
-  when: instana.agent.updates.pin != "" and instana.agent.updates.enabled|bool
 
 - name: 'template agent update config'
   template:
     dest:  "{{ config_prefix }}main.config.UpdateManager.cfg"
     src: 'templates/agent_update.j2'
-    group: "{{ instana.agent.group }}"
-    owner: "{{ instana.agent.user }}"
+    group: 'root'
+    owner: 'root'
     mode: 644
-  when: instana.agent.updates.pin == "" and instana.agent.updates.enabled|bool
 
 - name: 'template agent configuration'
   template:
     dest: "{{ config_dir }}instana/configuration.yaml"
     src: 'templates/agent_config.j2'
-    group: "{{ instana.agent.group }}"
-    owner: "{{ instana.agent.user }}"
+    group: 'root'
+    owner: 'root'
     mode: 644
-  when: instana.agent.zone != '' or (instana.agent.tags|length > 0)
 
 - name: 'create agent meta config'
+  register: modefile
   file:
     path: "{{ config_prefix }}main.config.Agent.cfg"
-    owner: "{{ instana.agent.user }}"
-    group: "{{ instana.agent.group }}"
+    owner: 'root'
+    group: 'root'
     mode: 644
     state: 'file'
 
+- notify: instana-agent-restart
+  when: modefile.changed
+
+# ansible 2.3 ::
+# - name: 'set agent mode in agent meta config'
+#   lineinfile:
+#     path: "{{ config_prefix }}main.config.Agent.cfg"
+#     line: "mode = {{ instana_agent_mode }}"
+
+# ansible < 2.3 ::
 - name: 'set agent mode in agent meta config'
   lineinfile:
-    path: "{{ config_prefix }}main.config.Agent.cfg"
-    line: "mode = {{ instana.agent.mode }}"
+    destfile: "{{ config_prefix }}main.config.Agent.cfg"
+    line: "mode = {{ instana_agent_mode|upper }}"

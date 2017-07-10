@@ -1,11 +1,10 @@
 # encoding: utf-8
-%YAML 1.2
 ---
 
 dependencies: []
 
 galaxy_info:
-  author: Stefan Staudenmeyer (@doertedev)
+  author: Instana, Inc.
   description: |
     Instana is the next generation Application Performance Management
     solution that automatically monitors scheduled environments/dynamic
