@@ -9,7 +9,7 @@ This [Ansible](https://ansible.com) role installs, configures and runs the monit
   - hosts: all
     become: yes
     roles:
-      - ansible-role
+      - instana-agent
     vars:
       instana_agent_flavor: "dynamic"
       instana_agent_jdk: "/opt/jdk"
