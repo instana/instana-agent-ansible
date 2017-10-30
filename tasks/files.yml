@@ -47,16 +47,13 @@
     mode: 644
 
 - name: 'create agent meta config'
-  register: modefile
   file:
     path: "{{ config_prefix }}main.config.Agent.cfg"
     owner: 'root'
     group: 'root'
     mode: 644
     state: 'file'
-
-- notify: instana-agent-restart
-  when: modefile.changed
+  notify: instana-agent-restart
 
 # ansible 2.3 ::
 # - name: 'set agent mode in agent meta config'
