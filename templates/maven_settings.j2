@@ -6,13 +6,13 @@
   <servers>
     <server>
       <id>features</id>
-      <username>agent</username>
-      <password>APBSjZhLhjeGZ9uq</password>
+      <username>_</username>
+      <password>{{ instana_agent_agent_key }}</password>
     </server>
     <server>
       <id>shared</id>
-      <username>agent</username>
-      <password>APBSjZhLhjeGZ9uq</password>
+      <username>_</username>
+      <password>{{ instana_agent_agent_key }}</password>
     </server>
     {% if instana_agent_mirror_auth_enabled %}
       <server>
