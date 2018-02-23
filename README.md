@@ -38,7 +38,7 @@ If you're an onprem customer, please specify your hostname and port in the corre
 
 ## Supported operating systems
 
-See [our official documentation](https://instana.atlassian.net/wiki/spaces/DOCS/pages/26163562/The+Manual+Installation+Process).
+See [our official documentation](https://docs.instana.io/quick_start/agent_setup/).
 
 ## Attributes
 

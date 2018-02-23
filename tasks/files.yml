@@ -14,6 +14,15 @@
     mode: 644
   notify: 'ensure the agent is running'
 
+- name: 'template maven proxy + mirror settings config'
+  template:
+    dest:  "{{ config_dir }}org.ops4j.pax.url.mvn.cfg"
+    src: 'templates/pax_maven_cfg.j2'
+    group: 'root'
+    owner: 'root'
+    mode: 644
+  notify: instana-agent-restart
+
 - name: 'template agent backend config'
   template:
     dest:  "{{ config_prefix }}main.sender.Backend.cfg"
