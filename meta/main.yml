@@ -8,7 +8,7 @@ galaxy_info:
   description: |
     Instana is the next generation Application Performance Management
     solution that automatically monitors scheduled environments/dynamic
-    modern applications.\nInstana comprehensively manages the quality
+    modern applications. Instana comprehensively manages the quality
     of service of your microservice applications with zero to absolute
     minimal configuration effort.
   license: Apache 2.0
