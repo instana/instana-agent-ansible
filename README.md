@@ -1,4 +1,6 @@
-# instana-agent Ansible role
+[![Build Status](https://travis-ci.org/instana/instana-agent-ansible.svg?branch=master)](https://travis-ci.org/instana/instana-agent-ansible)
+
+# instana-agent-ansible role
 
 This [Ansible](https://ansible.com) role installs, configures and runs the monitoring agent for the [Instana monitoring suite](https://www.instana.com).
 
