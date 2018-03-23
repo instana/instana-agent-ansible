@@ -2,7 +2,11 @@
 
 # instana-agent-ansible role
 
-This [Ansible](https://ansible.com) role installs, configures and runs the monitoring agent for the [Instana monitoring suite](https://www.instana.com).
+The Ansible role installs, configures and runs the monitoring agent for the [Instana monitoring suite](https://www.instana.com). You can find the role in the Ansible galaxy at https://galaxy.ansible.com/instana/instana-agent-ansible.
+
+To install the role use `ansible-galaxy install instana.instana-agent-ansible`.
+
+Here is an example of a playbook with the various configuration options:
 
 ## Example:
 
@@ -11,7 +15,7 @@ This [Ansible](https://ansible.com) role installs, configures and runs the monit
   - hosts: all
     become: yes
     roles:
-      - instana-agent
+      - instana.instana-agent-ansible
     vars:
       instana_agent_flavor: "dynamic"
       instana_agent_jdk: "/opt/jdk"
@@ -19,8 +23,8 @@ This [Ansible](https://ansible.com) role installs, configures and runs the monit
       instana_agent_updates_interval: "DAY"
       instana_agent_updates_time: "04:30"
       instana_agent_zone: "prod"
-      instana_agent_agent_key: abcdef1234567890+-?
-      instana_agent_endpoint_host: saas-us-west-2.instana.io
+      instana_agent_agent_key: <YOUR_INSTANA_AGENT_KEY>
+      instana_agent_endpoint_host: <YOUR_INSTANA_REGION_ENDPOINT:saas-us-west-2.instana.io>
       instana_agent_endpoint_port: 443
 ```
 
