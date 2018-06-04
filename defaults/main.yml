@@ -12,6 +12,11 @@
 # like setting database credentials in the configuration.yml file.
 instana_agent_run: True
 
+# The Instana Agent package repository will be configured only, when set
+# to true. E.g. disable this, when you want have your own package repo/mirror
+# setup.
+instana_agent_configure_repo: True
+
 # This mode specifies the mode under which the Instana agent should run.
 # Possible values are "apm", "infrastructure" and "off".
 # See:: https://docs.instana.io/quick_start/agent_configuration/#agent-mode

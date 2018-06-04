@@ -38,8 +38,3 @@
     gpgcheck: no
     name: 'Instana-Agent'
   when: ansible_pkg_mgr == 'yum'
-
-- name: 'install agent package'
-  package:
-    name: "instana-agent-{{ instana_agent_flavor }}"
-    state: 'latest'
