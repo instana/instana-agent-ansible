@@ -11,7 +11,7 @@
     src: 'templates/maven_settings.j2'
     group: 'root'
     owner: 'root'
-    mode: 644
+    mode: 0644
   notify: 'ensure the agent is running'
 
 - name: 'template maven proxy + mirror settings config'
@@ -20,7 +20,7 @@
     src: 'templates/pax_maven_cfg.j2'
     group: 'root'
     owner: 'root'
-    mode: 644
+    mode: 0644
   notify: instana-agent-restart
 
 - name: 'template agent backend config'
@@ -29,7 +29,7 @@
     src: 'templates/agent_backend.j2'
     group: 'root'
     owner: 'root'
-    mode: 644
+    mode: 0644
 
 - name: 'template agent sensor version pin config'
   template:
@@ -37,7 +37,7 @@
     src: 'templates/agent_bootstrap.j2'
     group: 'root'
     owner: 'root'
-    mode: 644
+    mode: 0644
 
 - name: 'template agent update config'
   template:
@@ -45,7 +45,7 @@
     src: 'templates/agent_update.j2'
     group: 'root'
     owner: 'root'
-    mode: 644
+    mode: 0644
 
 - name: 'template agent configuration'
   template:
@@ -53,14 +53,14 @@
     src: 'templates/agent_config.j2'
     group: 'root'
     owner: 'root'
-    mode: 644
+    mode: 0644
 
 - name: 'create agent meta config'
   file:
     path: "{{ config_prefix }}main.config.Agent.cfg"
     owner: 'root'
     group: 'root'
-    mode: 644
+    mode: 0644
     state: 'file'
   notify: instana-agent-restart
 
