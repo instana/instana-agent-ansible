@@ -56,5 +56,7 @@ This cookbook is being submitted and maintained under the [Apache v2.0 License](
 
 * [Bastian Spanneberg](https://github.com/spanneberg)
 * [Stefan Staudenmeyer](https://github.com/doerteDev)
+* [Marcel Birkner](https://github.com/marcelbirkner)
+* [James Parker](https://github.com/jmsprkr)
 
-Copyright 2017, INSTANA Inc.
+Copyright 2018, INSTANA Inc.
