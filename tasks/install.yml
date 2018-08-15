@@ -1,0 +1,7 @@
+# encoding: utf-8
+---
+
+- name: 'install agent package'
+  package:
+    name: "instana-agent-{{ instana_agent_flavor }}"
+    state: 'latest'
