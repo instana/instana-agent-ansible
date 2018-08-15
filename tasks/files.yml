@@ -5,6 +5,9 @@
     config_dir: '/opt/instana/agent/etc/'
     config_prefix: '/opt/instana/agent/etc/instana/com.instana.agent.'
 
+- name: "create config directory {{ config_dir }}"
+  file: path={{ config_dir }} state=directory
+  
 - name: 'template maven proxy + mirror settings config'
   template:
     dest:  "{{ config_dir }}mvn-settings.xml"
