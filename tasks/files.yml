@@ -57,6 +57,7 @@
     group: 'root'
     owner: 'root'
     mode: 0644
+  notify: instana-agent-restart
 
 - name: 'create agent meta config'
   file:
