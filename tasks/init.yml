@@ -13,7 +13,7 @@
   file:
     path: "{{ systemd_srv_dir }}"
     group: 'root'
-    mode: 644
+    mode: 0755
     owner: 'root'
     state: 'directory'
   when: ansible_service_mgr == 'systemd'
@@ -23,7 +23,7 @@
     dest: "{{ systemd_srv_dir }}/10-resources.conf"
     src: "templates/systemd_resources.j2"
     group: 'root'
-    mode: 644
+    mode: 0644
     owner: 'root'
   notify: reload-systemd
   when: >
