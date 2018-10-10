@@ -1,7 +1,7 @@
 [Service]
 {% if instana_agent_limit_cpu_enabled %}
 CPUAccounting=true
-CPUQuota={{ ( instana_agent_limit_cpu_quota * 100 ) }}%
+CPUQuota={{ (instana_agent_limit_cpu_quota * 100)|int }}%
 {% endif %}
 {% if instana_agent_limit_memory_enabled %}
 MemoryAccounting=true
