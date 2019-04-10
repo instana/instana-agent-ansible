@@ -12,7 +12,7 @@
 
 - name: 'add apt repository'
   apt_repository:
-    repo: "deb [arch=amd64] {{ package_url }}/agent generic main"
+    repo: "deb [arch=amd64] {{ package_url }}/agent/deb generic main"
     state: "present"
   when: ansible_pkg_mgr == 'apt'
 
