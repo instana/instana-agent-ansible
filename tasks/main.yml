@@ -32,7 +32,7 @@
     instana_agent_agent_key == ''
 
 - include: repo.yml
-  when: instana_agent_configure_repo
+  when: instana_agent_configure_repo|bool
 - include: install.yml
 - include: init.yml
 - include: files.yml
