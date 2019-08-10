@@ -60,11 +60,13 @@ com.instana.plugin.generic.hardware:
 #  user: ''
 #  password: ''
 
+{% if mongodb_user != '' %}
 # MongoDB
-#com.instana.plugin.mongodb:
-#  user: ''
-#  source: '' # database where the user is defined
-#  password: ''
+com.instana.plugin.mongodb:
+  user: '{{ mongodb_user }}'
+  source: '{{ mongodb_source }}' # database where the user is defined
+  password: '{{ mongodb_password }}'
+{% endif %}
 
 # Mssql
 #com.instana.plugin.mssql:

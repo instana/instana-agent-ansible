@@ -1,7 +1,7 @@
 # encoding: utf-8
 ---
-
-- set_fact:
+- name: "set package url"
+  set_fact:
     package_url: "https://_:{{ instana_agent_agent_key }}@packages.instana.io"
 
 - name: 'add apt key'

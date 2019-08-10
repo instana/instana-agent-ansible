@@ -1,13 +1,13 @@
 # encoding: utf-8
 ---
-
-- set_fact:
+- name: "set config directory"
+  set_fact:
     config_dir: '/opt/instana/agent/etc/'
     config_prefix: '/opt/instana/agent/etc/instana/com.instana.agent.'
 
 - name: "create config directory {{ config_dir }}"
   file: path={{ config_dir }} state=directory
-  
+
 - name: 'template maven proxy + mirror settings config'
   template:
     dest:  "{{ config_dir }}mvn-settings.xml"
@@ -68,13 +68,13 @@
   notify: instana-agent-restart
 
 # ansible 2.3 ::
-# - name: 'set agent mode in agent meta config'
-#   lineinfile:
-#     path: "{{ config_prefix }}main.config.Agent.cfg"
-#     line: "mode = {{ instana_agent_mode }}"
-
-# ansible < 2.3 ::
 - name: 'set agent mode in agent meta config'
   lineinfile:
-    destfile: "{{ config_prefix }}main.config.Agent.cfg"
-    line: "mode = {{ instana_agent_mode|upper }}"
+    path: "{{ config_prefix }}main.config.Agent.cfg"
+    line: "mode = {{ instana_agent_mode }}"
+
+# ansible < 2.3 ::
+# - name: 'set agent mode in agent meta config'
+#   lineinfile:
+#     destfile: "{{ config_prefix }}main.config.Agent.cfg"
+#     line: "mode = {{ instana_agent_mode|upper }}"
