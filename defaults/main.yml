@@ -93,6 +93,10 @@ instana_agent_zone: ""
 # See:: https://docs.instana.io/quick_start/agent_configuration/#tags
 instana_agent_tags: []
 
+# If you need to add additional settings to the Instana agent configuration.yaml file
+# Possible values: a block of custom agent configuration settings 
+instana_agent_configuration_customblock: ""
+
 # We support running and updating the Instana agent through a proxy setup.
 # See:: https://docs.instana.io/quick_start/on_prem/on_prem_agent_repository/#sonatype-nexus-proxy-setup
 instana_agent_proxy_enabled: False

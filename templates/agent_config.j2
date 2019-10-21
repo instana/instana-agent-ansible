@@ -180,3 +180,8 @@ com.instana.plugin.generic.hardware:
 #    DATABASE_NAME_2:
 #      user: '' #default is 'SYSTEM'
 #      password: ''
+
+{% if instana_agent_configuration_customblock != '' %}
+# Advanced Settings
+{{ instana_agent_configuration_customblock }}
+{% endif %}
