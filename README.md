@@ -55,11 +55,11 @@ See [our official documentation](https://docs.instana.io/quick_start/agent_setup
 
 ## Attributes
 
-* See [attributes file](https://github.com/instana/ansible-role/blob/master/attributes/default.rb).
+* See [attributes file](https://github.com/instana/instana-agent-ansible/blob/master/defaults/main.yml).
 
 ## License and Authors
 
-This cookbook is being submitted and maintained under the [Apache v2.0 License](https://github.com/instana/ansible-role/blob/master/LICENSE).
+This playbook is being submitted and maintained under the [Apache v2.0 License](https://github.com/instana/ansible-role/blob/master/LICENSE).
 
 * [Bastian Spanneberg](https://github.com/spanneberg)
 * [Stefan Staudenmeyer](https://github.com/doerteDev)
