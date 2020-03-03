@@ -1,5 +1,12 @@
 [![Build Status](https://travis-ci.org/instana/instana-agent-ansible.svg?branch=master)](https://travis-ci.org/instana/instana-agent-ansible)
 
+:warning: :warning: :warning:
+
+This repository is a blueprint to show how the Instana agent installation and configuration can be automated with Ansible and is intended for others to fork and build upon. It is not actively maintained. 
+If you have introduce new functionality on your fork that you think is useful for others, get in touch so we can link to it from here.
+
+:warning: :warning: :warning:
+
 # instana-agent-ansible role
 
 The Ansible role installs, configures and runs the monitoring agent for the [Instana monitoring suite](https://www.instana.com). You can find the role in the Ansible galaxy at https://galaxy.ansible.com/instana/instana-agent-ansible.
