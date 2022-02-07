@@ -136,26 +136,28 @@ com.instana.plugin.generic.hardware:
 #        - attributes: 'LoadedClassCount'
 #          type: 'absolute' # absolute will report the value as-is
 
-# Java Tracing
-#com.instana.plugin.javatrace:
-#  instrumentation:
-#    # Lightweight Bytecode Instrumentation, enabled by default
-#    # Disabling currently requires an agent restart
-#    enabled: true
-#    # OpenTracing instrumentation, disabled by default
-#    # Enabling requires an agent restart
-#    opentracing: false
-#    # To enable using the SDK, provide a list of packages that should be
-#    # scanned for SDK annotations. All subpackages are scanned, as it is a
-#    # starts-with prefix matching.
-#    # Scanning a large amount of classes slows down agent attach and requires
-#    # more CPU for parsing, therefore it is recommended to limit to packages
-#    # actually using SDK annotations.
-#    # By default no packages are scanned for SDK annotations.
-#    sdk:
-#      packages:
-#        - 'com.instana.backend'
-#        - 'com.instana.frontend'
+{% if instana_trace_packages|length > 0 %}
+com.instana.plugin.javatrace:
+  instrumentation:
+    # Lightweight Bytecode Instrumentation, enabled by default
+    # Disabling currently requires an agent restart
+    enabled: true
+    # OpenTracing instrumentation, disabled by default
+    # Enabling requires an agent restart
+    opentracing: false
+    # To enable using the SDK, provide a list of packages that should be
+    # scanned for SDK annotations. All subpackages are scanned, as it is a
+    # starts-with prefix matching.
+    # Scanning a large amount of classes slows down agent attach and requires
+    # more CPU for parsing, therefore it is recommended to limit to packages
+    # actually using SDK annotations.
+    # By default, no packages are scanned for SDK annotations.
+    sdk:
+      packages:
+{% for trace_one_package in instana_trace_packages %}
+        - '{{ trace_one_package }}'
+{% endfor %}
+{% endif %}
 
 # PHP Tracing
 #com.instana.plugin.php:

@@ -1,11 +1,10 @@
 This repository is forked from instana/instana-agent-ansible - a blueprint to show how the Instana agent installation and configuration can be automated with Ansible and is intended for others to fork and build upon. It is not actively maintained.
 If you have introduced new functionality on your fork that you think is useful for others, get in touch so we can link to it from here.
 
-# instana-agent-ansible role
+# ansible-instana-agent role
 
-The Ansible role installs, configures and runs the monitoring agent for the [Instana monitoring suite](https://www.instana.com). You can find the role in the Ansible galaxy at https://galaxy.ansible.com/instana/instana-agent-ansible.
-
-To install the role use `ansible-galaxy install instana.instana-agent-ansible`.
+NOT SUPPORTED: The Ansible role installs, configures and runs the monitoring agent for the [Instana monitoring suite](https://www.instana.com). You can find the role in the Ansible galaxy at https://galaxy.ansible.com/instana/instana-agent-ansible.
+NOT SUPPORTED: To install the role use `ansible-galaxy install instana.instana-agent-ansible`.
 
 Here is an example of a playbook with the various configuration options:
 
@@ -16,7 +15,7 @@ Here is an example of a playbook with the various configuration options:
   - hosts: all
     become: yes
     roles:
-      - instana.instana-agent-ansible
+      - ansible-instana-agent
     vars:
       instana_agent_flavor: "dynamic"
       instana_agent_jdk: "/opt/jdk"
@@ -49,7 +48,7 @@ See [our official documentation](https://docs.instana.io/quick_start/agent_setup
 
 ## Attributes
 
-* See [attributes file](https://github.com/instana/instana-agent-ansible/blob/master/defaults/main.yml).
+* See [attributes file](defaults/main.yml).
 
 ## License and Authors
 

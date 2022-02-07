@@ -93,6 +93,15 @@ instana_agent_zone: ""
 # See:: https://docs.instana.io/quick_start/agent_configuration/#tags
 instana_agent_tags: []
 
+
+# com.instana.plugin.javatrace - Lightweight Bytecode Instrumentation
+# To enable using the SDK, provide a list of packages that should be
+# scanned for SDK annotations. All subpackages are scanned, as it is a starts-with prefix matching.
+# Scanning a large amount of classes slows down agent attach and requires
+# more CPU for parsing, therefore it is recommended to limit to packages actually using SDK annotations.
+# By default, no packages are scanned for SDK annotations.
+instana_trace_packages: []
+
 # We support running and updating the Instana agent through a proxy setup.
 # See:: https://docs.instana.io/quick_start/on_prem/on_prem_agent_repository/#sonatype-nexus-proxy-setup
 instana_agent_proxy_enabled: False
