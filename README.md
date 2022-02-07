@@ -1,11 +1,5 @@
-[![Build Status](https://travis-ci.org/instana/instana-agent-ansible.svg?branch=master)](https://travis-ci.org/instana/instana-agent-ansible)
-
-:warning: :warning: :warning:
-
-This repository is a blueprint to show how the Instana agent installation and configuration can be automated with Ansible and is intended for others to fork and build upon. It is not actively maintained. 
-If you have introduce new functionality on your fork that you think is useful for others, get in touch so we can link to it from here.
-
-:warning: :warning: :warning:
+This repository is forked from instana/instana-agent-ansible - a blueprint to show how the Instana agent installation and configuration can be automated with Ansible and is intended for others to fork and build upon. It is not actively maintained.
+If you have introduced new functionality on your fork that you think is useful for others, get in touch so we can link to it from here.
 
 # instana-agent-ansible role
 
