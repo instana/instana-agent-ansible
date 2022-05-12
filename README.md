@@ -29,7 +29,7 @@ Here is an example of a playbook with the various configuration options:
 
 **`instana-agent-dynamic`**
 
-This blank agent comes bundled with a JDK and is configured to download all neccessary sensors when it starts. Additionally, it is configured to update its set of sensors on a daily basis.
+This blank agent comes bundled with a JDK and is configured to download all necessary sensors when it starts. Additionally, it is configured to update its set of sensors on a daily basis.
 
 **`instana-agent-static`**
 
