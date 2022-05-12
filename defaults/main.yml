@@ -127,4 +127,4 @@ instana_agent_mirror_urls_release: ""
 instana_agent_mirror_urls_shared: ""
 
 ## Process Abnormal Termination
-instana_plugin_ebpf_enabled: False
+instana_plugin_ebpf_enabled: false
