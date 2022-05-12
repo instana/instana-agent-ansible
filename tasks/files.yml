@@ -7,7 +7,7 @@
 
 - name: "create config directory {{ config_dir }}"
   file: path={{ config_dir }} state=directory
-  
+
 - name: 'template maven proxy + mirror settings config'
   template:
     dest:  "{{ config_dir }}mvn-settings.xml"
@@ -57,6 +57,7 @@
     group: 'root'
     owner: 'root'
     mode: 0644
+  notify: instana-agent-restart
 
 - name: 'create agent meta config'
   file:
