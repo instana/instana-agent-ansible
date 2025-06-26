@@ -1,4 +1,3 @@
 # Maintainers
 
-* [Bastian Spanneberg](https://github.com/spanneberg)
-* [Stefan Staudenmeyer](https://github.com/doertedev)
+The ansible scripts are unmaintained for the time being.

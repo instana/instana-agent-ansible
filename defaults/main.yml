@@ -4,7 +4,7 @@
 # instana-agent - Attributes file - defining attributes for the instana-agent
 
 # Author:: Stefan Staudenmeyer <stefan.staudenmeyer@instana.com>
-# Copyright:: 2017, Instana, Inc.
+# Copyright:: IBM Corp. 2025
 # License:: Apache-2.0
 
 # We won't make sure that the agent is running if this is set to false.
@@ -19,13 +19,13 @@ instana_agent_configure_repo: True
 
 # This mode specifies the mode under which the Instana agent should run.
 # Possible values are "apm", "infrastructure" and "off".
-# See:: https://docs.instana.io/quick_start/agent_configuration/#agent-mode
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=agents-configuring-host
 instana_agent_mode: "apm"
 
 # These settings enable you to set hard resource limits for the Instana agent
 # and its runtime underneath via Systemd CGroup settings.
 # Possible values: True | False
-# See:: https://docs.instana.io/quick_start/agent_configuration/#limiting-agents-cpu-and-memory-in-different-environments
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=agents-configuring-host
 instana_agent_limit_cpu_enabled: True
 instana_agent_limit_cpu_quota: 0.5 # ( == 50%)
 instana_agent_limit_memory_enabled: True
@@ -39,31 +39,31 @@ instana_agent_limit_memory_maxsize: 512 # (MB)
 # The dynamic flavored agent comes with a JDK as well, and downloads the
 # required sensors on startup phase.
 # Possible values: "static" | "dynamic".
-# See:: https://docs.instana.io/quick_start/agent_configuration/
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=planning-instana-agent-types#host-agent-types
 instana_agent_flavor: 'dynamic'
 
 # When you register with us you receive a string that makes the credentials you
 # need in order to download the agent and its sensors. It can be seen as a
 # tenantcy identifier across the platform.
-# See:: https://docs.instana.io/quick_start/agent_configuration/#backend
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=agents-configuring-host#configuring-instana-backend
 instana_agent_agent_key: ""
 
 # This is the machine the Instana agent will connect to directly. This will
 # either be one of our SaaS endpoints, or your Instana on premises installation
 # hostname or address.
-# See:: https://docs.instana.io/quick_start/agent_setup/linux/#one-liner-installation
-instana_agent_endpoint_host: "saas-us-west-2.instana.io"
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=agents-configuring-host#configuring-instana-backend
+instana_agent_endpoint_host: ""
 
 # See instana.agent.endpoint.host. On our SaaS platform, the
 # monitoring endpoint port is 443. For most on premises installations, this
 # number is 1444.
-# See:: https://docs.instana.io/quick_start/agent_setup/linux/#one-liner-installation
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=agents-configuring-host#configuring-instana-backend
 instana_agent_endpoint_port: 443
 
 # The Instana agent updates its set of sensors automatically in the background
 # unless configured differently.
 # Possible values: True | False.
-# See:: https://docs.instana.io/quick_start/agent_configuration/#agent-versioning-and-update-management
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=agents-configuring-updates-dynamic-host
 instana_agent_updates_enabled: True
 
 # We support running the Instana agent with a specific set of sensors.
@@ -72,29 +72,29 @@ instana_agent_updates_pin: ""
 
 # See instana.agent.updates.enabled.
 # Possible values: "DAY" | "MONDAY" | "TUESDAY"...
-# See:: https://docs.instana.io/quick_start/agent_configuration/#agent-versioning-and-update-management
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=agents-configuring-updates-dynamic-host#control-updates-in-host-agents
 instana_agent_updates_interval: "DAY"
 
 # See instana.agent.updates.enabled.
 # Possible values: a string containing the time of the day where the update
 #   is scheduled, in 24h format.
-# See:: https://docs.instana.io/quick_start/agent_configuration/#agent-versioning-and-update-management
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=agents-configuring-updates-dynamic-host#control-updates-in-host-agents
 instana_agent_updates_time: "04:30"
 
 # The agent zone is a visual helper under which hosts are being categorized
 # on the physical map. This, along with the list of host tags, can help filter
 # and search.
 # Possible values: a string containing UTF-8 characters.
-# See:: https://docs.instana.io/quick_start/agent_configuration/#custom-zones
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=cha-configuring-host-agents-by-using-agent-configuration-file#setting-custom-zones
 instana_agent_zone: ""
 
 # The agent tags are a list of strings that will categorize the host machine
 # and are. This, along with the list of host tags, can help filter and search.
-# See:: https://docs.instana.io/quick_start/agent_configuration/#tags
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=cha-configuring-host-agents-by-using-agent-configuration-file#specifying-host-tags
 instana_agent_tags: []
 
 # We support running and updating the Instana agent through a proxy setup.
-# See:: https://docs.instana.io/quick_start/on_prem/on_prem_agent_repository/#sonatype-nexus-proxy-setup
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=agents-configuring-host#setting-up-an-agent-proxy
 instana_agent_proxy_enabled: False
 instana_agent_proxy_type: "http"
 instana_agent_proxy_host: ""
@@ -109,7 +109,7 @@ instana_agent_proxy_dns: True
 
 # If you mirror our agent sensor and update repository, you can specify its
 # credentials and addresses here.
-# See:: https://docs.instana.io/quick_start/on_prem/on_prem_agent_repository
+# See:: https://www.ibm.com/docs/en/instana-observability/current?topic=agents-setting-up-agent-repositories-dynamic-host#setting-up-an-agent-repository-mirror
 instana_agent_mirror_enabled: False
 instana_agent_mirror_auth_enabled: False
 instana_agent_mirror_auth_username: ""

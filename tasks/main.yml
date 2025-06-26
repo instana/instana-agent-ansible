@@ -31,8 +31,8 @@
     instana_agent_endpoint_port | int == 0 or
     instana_agent_agent_key == ''
 
-- include: repo.yml
-  when: instana_agent_configure_repo|bool
-- include: install.yml
-- include: init.yml
-- include: files.yml
+- include_tasks: repo.yml
+  when: instana_agent_configure_repo
+- include_tasks: install.yml
+- include_tasks: init.yml
+- include_tasks: files.yml

@@ -3,6 +3,14 @@
 
 - set_fact:
     package_url: "https://_:{{ instana_agent_agent_key }}@packages.instana.io"
+    deb_architecture: {
+      "aarch64": "arm64",
+      "x86_64": "amd64"
+    }
+
+- name: Debug message
+  ansible.builtin.debug:
+    msg: "{{ [ansible_architecture] | map('extract', deb_architecture) | first }}"
 
 - name: 'add apt key'
   apt_key:
@@ -11,8 +19,8 @@
   when: ansible_pkg_mgr == 'apt'
 
 - name: 'add apt repository'
-  apt_repository:
-    repo: "deb [arch=amd64] {{ package_url }}/agent generic main"
+  ansible.builtin.apt_repository:
+    repo: "deb [arch={{ [ansible_architecture] | map('extract', deb_architecture) | first }}] {{ package_url }}/agent generic main"
     state: "present"
   when: ansible_pkg_mgr == 'apt'
 

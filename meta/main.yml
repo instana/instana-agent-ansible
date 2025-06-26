@@ -4,7 +4,7 @@
 dependencies: []
 
 galaxy_info:
-  author: Instana, Inc.
+  author: IBM Corp.
   description: |
     Instana is the next generation Application Performance Management
     solution that automatically monitors scheduled environments/dynamic
@@ -12,7 +12,7 @@ galaxy_info:
     of service of your microservice applications with zero to absolute
     minimal configuration effort.
   license: Apache 2.0
-  company: Instana, Inc.
+  company: IBM Corp.
   min_ansible_version: 2.3.0.0
   standards:
     - version: 1.2

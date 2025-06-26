@@ -32,7 +32,7 @@ com.instana.plugin.host:
 # Hardware & Zone
 {% if instana_agent_zone != '' %}
 com.instana.plugin.generic.hardware:
-  availability-zone: '{{ instana_agent_zone }}'
+  availability-zone: "{{ instana_agent_zone }}"
   enabled: true # disabled by default
 {% endif %}
 
